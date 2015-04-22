@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Devoo.AsyncLoader</id>
+        <version>1.0.0</version>
+        <authors>Devoo</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Allows Asp.Mvc async load of ajax data or scripts</description>
+        <tags>mvc asp async ajax jquery</tags>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System.Web" targetFramework="" />
+        </frameworkAssemblies>
+    </metadata>
+    <files>
+        <file src="AsyncLoader.Demo\AsyncLoader.Demo\App\AsyncLoader.cs" target="content\App\AsyncLoader.cs" />
+        <file src="AsyncLoader.Demo\AsyncLoader.Demo\Controllers\AsyncController.cs" target="content\Controllers\AsyncController.cs" />
+    </files>
+</package>
