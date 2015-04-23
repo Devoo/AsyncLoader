@@ -1,7 +1,6 @@
-##![Icon](https://raw.githubusercontent.com/Devoo/AsyncLoader/master/Build/AsyncLogo.small.png) AsyncLoader: Dynamic Ajax Request Made Easy
+##![Icon](https://raw.githubusercontent.com/Devoo/AsyncLoader/master/Build/AsyncLogo.small.png) AsyncLoader: Dynamic Ajax Requests Made Easy
 
-Helper classes to dynamic load content in an ASP.NET Controller or View using JQuery using **one line of code**
-
+Helper classes to dynamic load content in an ASP.NET View using JQuery using **one line of code**
 
 ## How to Install
 AsyncLoader are only two helper classes with no external dependencies (except jquery and asp.mvc)
