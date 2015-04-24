@@ -6,29 +6,30 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
+
 namespace System.Web
 {
     public static class AsyncLoader
     {
 
-        private static readonly ConcurrentStringDictionaryWithTimeout<Func<string>> mAsyncData =
-            new ConcurrentStringDictionaryWithTimeout<Func<string>>();
+        private static readonly ConcurrentStringDictionaryWithTimeout<Func<string, string>> mAsyncData =
+            new ConcurrentStringDictionaryWithTimeout<Func<string, string>>();
 
-        public static string AsyncData(string id)
+        public static string AsyncData(string id, string data = null)
         {
-            Func<string> task;
+            Func<string, string> task;
             if (!mAsyncData.TryGetValue(id, out task))
                 return "";
 
-            var res = task();
+            var res = task(data);
 
             return res;
         }
-
+        
         public static HtmlString LoadAsync(
             this HtmlHelper helper,
             Func<string> asyncData,
-            TimeSpan refreshEvery,
+            TimeSpan refreshEvery = default(TimeSpan),
             Func<string, string> afterLoadScript = null)
         {
             return LoadAsync(helper, @"<i class=""fa fa-2x fa-spin fa-spinner"" style=""color:#999;margin: 10px;""></i><br/>",
@@ -39,7 +40,7 @@ namespace System.Web
             this HtmlHelper helper,
             string loadingHtml,
             Func<string> asyncData,
-            TimeSpan refreshEvery,
+            TimeSpan refreshEvery = default(TimeSpan),
             Func<string, string> afterLoadScript = null)
         {
             return new HtmlString(LoadAsync(loadingHtml, asyncData, refreshEvery, afterLoadScript));
@@ -60,15 +61,24 @@ namespace System.Web
             TimeSpan refreshEvery,
             Func<string, string> afterLoadScript = null)
         {
+            return LoadAsync(loadingHtml, args => asyncData(), refreshEvery, afterLoadScript);
+        }
+
+        public static string LoadAsync(
+            string loadingHtml,
+            Func<string, string> asyncData,
+            TimeSpan refreshEvery,
+            Func<string, string> afterLoadScript = null)
+        {
             var guid = Guid.NewGuid().ToString().Replace("-", "");
 
             var res = Environment.NewLine + "<div id='async-" + guid + "' style='clear:both;' >" + loadingHtml + "</div> ";
 
             mAsyncData.Add(guid, refreshEvery != TimeSpan.Zero
                 ? TimeSpan.FromDays(1)
-                : TimeSpan.FromHours(1), () => asyncData());
+                : TimeSpan.FromHours(1), (args) => asyncData(args));
 
-            res += @"<script>$( document ).ready(function() {";
+            res += @"<script>$(function() {";
 
             if (refreshEvery != TimeSpan.Zero)
                 res += "var interval_" + guid + " = null;" + Environment.NewLine + " function asyncLoad" + guid + "(){";
@@ -83,7 +93,7 @@ namespace System.Web
 
             if (refreshEvery != TimeSpan.Zero)
                 res += "if (interval_" + guid + @" == null) interval_" + guid + " = setInterval(asyncLoad" + guid +
-                       ", " + ((int)refreshEvery.TotalMilliseconds) + ");" + Environment.NewLine;
+                       ", " + ((int)refreshEvery.TotalMilliseconds) + ");" + Environment.NewLine + Environment.NewLine;
 
             if (afterLoadScript != null)
                 res += afterLoadScript("async-" + guid);
@@ -105,12 +115,21 @@ namespace System.Web
         {
             var guid = Guid.NewGuid().ToString().Replace("-", "");
 
-            mAsyncData.Add(guid, TimeSpan.FromHours(1), () => asyncResponse);
+            mAsyncData.Add(guid, TimeSpan.FromHours(1), _ => asyncResponse);
 
             return guid;
         }
 
         public static string SaveForAsync(Func<string> asyncResponseFunc)
+        {
+            var guid = Guid.NewGuid().ToString().Replace("-", "");
+
+            mAsyncData.Add(guid, TimeSpan.FromHours(1), _ => asyncResponseFunc());
+
+            return guid;
+        }
+
+        public static string SaveForAsync(Func<string, string> asyncResponseFunc)
         {
             var guid = Guid.NewGuid().ToString().Replace("-", "");
 

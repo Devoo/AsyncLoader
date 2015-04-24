@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.explain {
+    padding-left: 25px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+}
+
+.syntaxhighlighter {
+    padding-left: 25px;
+}

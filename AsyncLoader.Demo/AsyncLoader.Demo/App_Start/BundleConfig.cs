@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace AsyncLoader.Demo
+namespace AsyncLoaderDemo
 {
     public class BundleConfig
     {

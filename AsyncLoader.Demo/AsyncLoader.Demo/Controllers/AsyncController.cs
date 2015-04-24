@@ -4,13 +4,14 @@ using System.Web.Mvc;
 
 namespace System.Web
 {
-
     public class AsyncController : Controller
     {
-        [Route("async/data/{id}")]
-        public string Data(string id)
+        [Route("async/data/{id}/{extra?}")]
+        public string Data(string id, string extra = null)
         {
-            return AsyncLoader.AsyncData(id);
+            return AsyncLoader.AsyncData(id, extra);
         }
+
+
     }
 }

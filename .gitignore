@@ -1,0 +1,17 @@
+/AsyncLoader.Demo/AsyncLoader.Demo/bin
+/AsyncLoader.Demo/AsyncLoader.Demo/obj
+/AsyncLoader.Demo/AsyncLoader.Demo.Tests/bin
+/AsyncLoader.Demo/AsyncLoader.Demo.Tests/obj
+/AsyncLoader.Demo/packages/Antlr.3.5.0.2
+/AsyncLoader.Demo/packages/bootstrap.3.3.4
+/AsyncLoader.Demo/packages/jQuery.2.1.3
+/AsyncLoader.Demo/packages/Microsoft.AspNet.Mvc.5.2.3
+/AsyncLoader.Demo/packages/Microsoft.AspNet.Razor.3.2.3
+/AsyncLoader.Demo/packages/Microsoft.AspNet.Web.Optimization.1.1.3
+/AsyncLoader.Demo/packages/Microsoft.AspNet.WebPages.3.2.3
+/AsyncLoader.Demo/packages/Microsoft.Web.Infrastructure.1.0.0.0
+/AsyncLoader.Demo/packages/Newtonsoft.Json.6.0.8
+/AsyncLoader.Demo/packages/WebGrease.1.6.0
+
+*.suo
+*.user

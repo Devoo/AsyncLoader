@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace AsyncLoader.Demo
+namespace AsyncLoaderDemo
 {
     public class FilterConfig
     {

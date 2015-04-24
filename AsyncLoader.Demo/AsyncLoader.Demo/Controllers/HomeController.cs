@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
-namespace AsyncLoader.Demo.Controllers
+namespace AsyncLoaderDemo.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            return View();
-        }
+            ViewBag.Demo1 = AsyncLoader.SaveForAsync("Plan Data Saved");
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Demo2 = AsyncLoader.SaveForAsync(() =>
+            {
+                Thread.Sleep(2000);
+                return "After 2 seconds you get this...";
+            });
 
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Demo3 = AsyncLoader.SaveForAsync(args =>
+            {
+                Thread.Sleep(1000);
+                return "After 1 seconds with args: " + args;
+            });
+            
 
             return View();
         }

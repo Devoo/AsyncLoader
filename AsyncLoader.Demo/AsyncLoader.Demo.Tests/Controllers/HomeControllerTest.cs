@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AsyncLoader.Demo;
-using AsyncLoader.Demo.Controllers;
+using AsyncLoaderDemo;
+using AsyncLoaderDemo.Controllers;
 
-namespace AsyncLoader.Demo.Tests.Controllers
+namespace AsyncLoaderDemo.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
