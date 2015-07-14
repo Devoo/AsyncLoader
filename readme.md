@@ -9,6 +9,22 @@ It can be installed issuing the following command in the [Package Manager Consol
 
 	PM> Install-Package Devoo.AsyncLoader
 
-### Sample code
+### Sample View Code
 
-This is an example of how to use the AsyncLoader
+```csharp
+ // Plain Text Async
+ @Html.LoadAsync(() => "Plain Text")
+
+ 
+ // Autorefresh async text
+ // Each second an ajax call will be made to reload the new string
+ @Html.LoadAsync(() => "Current Time: " + DateTime.Now.ToString(), TimeSpan.FromSeconds(1))
+ 
+ // Delayed load of the async string
+ @Html.LoadAsync(() =>
+                {
+                    Thread.Sleep(2000);
+                    return "After slow function you get the result...";
+                })
+
+```
