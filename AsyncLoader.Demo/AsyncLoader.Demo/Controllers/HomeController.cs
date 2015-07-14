@@ -11,7 +11,7 @@ namespace AsyncLoaderDemo.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Demo1 = AsyncLoader.SaveForAsync("Plan Data Saved");
+            ViewBag.Demo1 = AsyncLoader.SaveForAsync("Plain Data Saved");
 
             ViewBag.Demo2 = AsyncLoader.SaveForAsync(() =>
             {
